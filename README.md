@@ -27,6 +27,9 @@ An offline & mobile first solution for protection and ease of investing for unde
     - Caveats:
       - Android phone must be online all the time with IFTTT and Pushbullet running in the background
 
+## Architecture
+![Architecture](https://github.com/abhisekpadhi/rain-bank/blob/main/docs/infra.png "aws design")
+
 ## Db schema
 - table: `userAccountIdMapping`
 ```

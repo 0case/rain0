@@ -26,7 +26,104 @@ An offline & mobile first solution for protection and ease of investing for unde
     - No need to dealing with CPAAS service providers
     - Caveats:
       - Android phone must be online all the time with IFTTT and Pushbullet running in the background
-  
+
+## Db schema
+- table: `userAccountIdMapping`
+```
+phone (pk)
+id
+```
+
+- table: `userAccount`
+```
+id (pk)
+name
+phone
+loc
+pan
+verification
+balance
+currentActive
+createdAt
+ ```
+
+- table: `userTxn`
+```
+txnId (pk)
+firstParty
+secondParty
+requestType
+money
+status
+createdAt
+currentActive
+```
+
+- table: `floatingCashRequest`
+indicates latest ask for floating cash request id
+```
+phone(pk)
+id
+```
+
+- table: `userRequest`
+```
+id (pk)
+phone
+requestType
+where
+money
+otherAccount
+status
+extraInfo
+currentActive
+createdAt
+```
+
+- table: `userAccountLedger`
+```
+id (pk)
+phone
+op
+note
+money
+openingBalance
+createdAt
+```
+
+- table `userBucket`
+```
+phoneWithBucketName (pk)
+balance
+```
+
+- enums
+
+```javascript
+const requestType = {
+  register: 'register',
+  collect: 'collect',
+  pay: 'pay',
+  transfer: 'transfer',
+  seeSaved: 'seeSaved',
+  sip: 'sip',
+  bucket: 'bucket',
+  findDeposit: 'findDeposit',
+  findWithdraw: 'findWithdraw'
+}
+
+const txnStatus = {
+  created: 'created',
+  success: 'success',
+  failed: 'failed',
+}
+
+const op = {
+    debit: 'debit',
+    credit: 'credit'
+}
+```
+
 ## event schema
 - Message body published to sqs
 ```json
